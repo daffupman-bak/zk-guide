@@ -1,8 +1,5 @@
 package io.daff.starter;
 
-import java.io.IOException;
-
-import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.server.auth.DigestAuthenticationProvider;
 
 public class AclUtils {

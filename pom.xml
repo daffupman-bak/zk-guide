@@ -11,6 +11,19 @@
 	</modules>
 	<name>zk-guide</name>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<!-- 指定maven使用的jdk版本 -->
@@ -24,6 +37,37 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>8080</port>
+					<path>/</path>
+					<useBodyEncodingForURI>true</useBodyEncodingForURI>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
 		</plugins>
+		<resources>
+			<!-- 如果不加，那么打包的时候mapper文件不会被加载进来 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
 </project>

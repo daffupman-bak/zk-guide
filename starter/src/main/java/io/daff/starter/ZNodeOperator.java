@@ -2,6 +2,7 @@ package io.daff.starter;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
+import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,8 +52,8 @@ public class ZNodeOperator implements Watcher {
              */
             result = zookeeper.create(path, data, acls, CreateMode.PERSISTENT);
 
-//			String ctx = "{'create':'success'}";
-//			zookeeper.create(path, data, acls, CreateMode.PERSISTENT, new CreateCallBack(), ctx);
+			// String ctx = "{'create':'success'}";
+			// zookeeper.create(path, data, acls, CreateMode.PERSISTENT, new CreateCallBack(), ctx);
 
             System.out.println("创建节点：\t" + result + "\t成功...");
             Thread.sleep(2000);
@@ -65,24 +66,24 @@ public class ZNodeOperator implements Watcher {
         ZNodeOperator zkServer = new ZNodeOperator(zkServerPath);
 
         // 创建zk节点
-//		zkServer.createZKNode("/testnode", "testnode".getBytes(), Ids.OPEN_ACL_UNSAFE);
+		// zkServer.createZKNode("/testnode", "testnode".getBytes(), Ids.OPEN_ACL_UNSAFE);
 
-        /**
-         * 参数：
-         * path：节点路径
-         * data：数据
-         * version：数据状态
+        /*
+          参数：
+          path：节点路径
+          data：数据
+          version：数据状态
          */
-//		Stat status  = zkServer.getZookeeper().setData("/testnode", "xyz".getBytes(), 2);
-//		System.out.println(status.getVersion());
+		// Stat status  = zkServer.getZookeeper().setData("/testnode", "xyz".getBytes(), 2);
+		// System.out.println(status.getVersion());
 
-        /**
-         * 参数：
-         * path：节点路径
-         * version：数据状态
+        /*
+          参数：
+          path：节点路径
+          version：数据状态
          */
         zkServer.createZKNode("/test-delete-node", "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE);
-//		zkServer.getZookeeper().delete("/test-delete-node", 2);
+		// zkServer.getZookeeper().delete("/test-delete-node", 2);
 
         String ctx = "{'delete':'success'}";
         zkServer.getZookeeper().delete("/test-delete-node", 0, new DeleteCallBack(), ctx);
